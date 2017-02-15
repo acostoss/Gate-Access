@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="{{ url_for('static', filename='android-chrome-192x192.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-32x32.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-16x16.png') }}" sizes="16x16">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <link rel="mask-icon" href="{{ url_for('static', filename='safari-pinned-tab.svg') }}" color="#19bcfc">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='mstile-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
+      
+    <title>Gate Control</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <style>
+        .btn, .btn:focus {
+            background: #3498db;
+            box-shadow: 0px 8px #2980b9;
+            border: none;
+            display: block;
+            float: left;
+            border-radius:7px;
+            padding:30px;
+            text-align:center;
+            text-decoration:none;
+            font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+            position:relative;
+            top: 0;
+            transition: all .1s ease-in-out;
+        }
+        
+        .btn:hover {
+            background: #3498db;
+            top:2px;
+            box-shadow: 0px 6px #2980b9;
+        }
+        .btn:active {
+            background: #2980b9;
+            box-shadow: 0px 0px #2980b9;
+            top:8px;
+            transition: all .1s ease-in-out;
+        }
+        
+        
+    </style>
+</head>
+
+<body class="container">
+   
+    <h1 class="display-4 hidden-md-up">Gate Control</h1>
+    
+    <h1 class="display-3 hidden-sm-down">Gate Control</h1>
+    
+   {% for pin in pins %}
+    
+   {% if pins[pin].state == true %}
+      {{ message }} aaaa
+       <div class="row"><div class="col-md-12">
+      <a href="javascript:window.location.href=window.location.href" class="btn btn-block btn-lg btn-primary">Refresh</a></div></div>
+   {% else %}
+      {{ message }}<div class="row"><div class="col-md-12">
+      <a href="/{{pin}}/open" class="btn btn-block btn-lg btn-primary" role="button">Open the gate</a></div></div>
+   {% endif %}
+   {% endfor %}
+    <script type="text/javascript">
+        var path = location.pathname;
+        if (path == "/17/open") {
+            console.log("opening! refreshing in 5 seconds")
+            setTimeout(function(){
+                window.location.href = "../..";
+            }, 30000);
+        }
+        console.log(path)
+    </script>
+</body>
+</html>
